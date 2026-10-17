@@ -71,7 +71,7 @@ namespace _01.Scripts.Player
         #region Handler
 
         public void SetMoveDir(Vector2 dir) => moveMd.SetMoveDir(dir);
-        private void DashHandler() => _stateController.ChangeMoveState(StateEnums.Dash);
+        private void DashHandler() => _stateController.ChangeState(StateEnums.Dash);
 
         #endregion
 

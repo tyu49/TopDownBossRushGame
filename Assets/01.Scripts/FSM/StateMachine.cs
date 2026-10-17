@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace _01.Scripts.FSM
 {
-    public abstract class AbstractStateMachine
+    public class StateMachine
     {
         private AbstractState _currentState;
         private Dictionary<StateEnums, AbstractState> _stateDic = new ();
-        protected bool _lockedChange;
+        private bool _lockedChange;
     
-        public virtual void AddState(StateEnums type, AbstractState abstractState)
+        public void AddState(StateEnums type, AbstractState abstractState)
         {
             if (!_stateDic.TryAdd(type, abstractState))
                 Debug.LogError("중복된 키값을 가진 상태 추가 시도");
         }
 
-        public virtual void ChangeState(StateEnums type)
+        public void ChangeState(StateEnums type)
         {
             if (!_stateDic.ContainsKey(type))
             {
@@ -27,7 +27,7 @@ namespace _01.Scripts.FSM
             _currentState.Enter();
         }
 
-        public virtual void Initialize(StateEnums type)
+        public void Initialize(StateEnums type)
         {
             if (!_stateDic.TryGetValue(type, out var state))
             {
@@ -37,22 +37,18 @@ namespace _01.Scripts.FSM
             _currentState = state;
         }
 
-        public virtual void UpdateState()
+        public void UpdateState()
         {
             _currentState.StateUpdate();
         }
 
-        public virtual void CallTrigger()
+        public void CallTrigger()
         {
             _currentState.TriggerCalled();
         }
-        public virtual void SetRuledState()
-        {
-        }
 
-        public virtual void SetDefaultState()
-        {
-        }
+        public void SetChangeLock(bool value) => _lockedChange = value;
+
 
 
 

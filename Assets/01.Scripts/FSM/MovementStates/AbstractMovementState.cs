@@ -6,7 +6,7 @@ namespace _01.Scripts.FSM.MovementFSM
     {
         protected MovementModule _moveMd;
         
-        public AbstractMovementState(AbstractStateMachine stateMachine, IStateController stateController, MovementModule _moveMd) : base(stateMachine, stateController)
+        public AbstractMovementState(StateMachine stateMachine, IStateController stateController, MovementModule _moveMd) : base(stateMachine, stateController)
         {
             this._moveMd = _moveMd;
         }

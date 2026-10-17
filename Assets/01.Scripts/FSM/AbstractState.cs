@@ -2,10 +2,10 @@
 {
     public abstract class AbstractState
     {
-        protected AbstractStateMachine _stateMachine;
+        protected StateMachine _stateMachine;
         protected IStateController _stateController;
         
-        public AbstractState(AbstractStateMachine stateMachine, IStateController stateController)
+        public AbstractState(StateMachine stateMachine, IStateController stateController)
         {
             _stateController = stateController;
             _stateMachine = stateMachine;

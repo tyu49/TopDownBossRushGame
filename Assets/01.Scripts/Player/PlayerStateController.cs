@@ -9,34 +9,28 @@ namespace _01.Scripts.Player
     public class PlayerStateController : MonoBehaviour, IStateController
     {
         private PlayerController _player;
-        private MovementStateMachine _moveSM;
+        private StateMachine _statMachine;
         
         public void Initialize(PlayerController player)
         {
             _player = player;
-            _moveSM = new MovementStateMachine(_player.moveMd);
+            _statMachine = new StateMachine();
             MakeStates();
-            SMInitialize();
-        }
-
-        private void SMInitialize()
-        {
-            _moveSM.Initialize(StateEnums.CanMove);
+            _statMachine.Initialize(StateEnums.CanMove);
         }
 
         private void MakeStates()
         {
-            _moveSM.AddState(StateEnums.BeRuled, new MovementRuledState(_moveSM, this, _player.moveMd));
-            _moveSM.AddState(StateEnums.CanMove, new MovementCanMoveState(_moveSM, this, _player.moveMd));
-            _moveSM.AddState(StateEnums.Dash, new MovementDashState(_moveSM, this, _player.moveMd));
+            _statMachine.AddState(StateEnums.CanMove, new MovementCanMoveState(_statMachine, this, _player.moveMd));
+            _statMachine.AddState(StateEnums.Dash, new MovementDashState(_statMachine, this, _player.moveMd));
         }
 
         private void Update()
         {
-            _moveSM.UpdateState();
+            _statMachine.UpdateState();
         }
 
-        public void ChangeMoveState(StateEnums type) => _moveSM.ChangeState(type);
+        public void ChangeState(StateEnums type) => _statMachine.ChangeState(type);
 
         public void SetAllDefault(StateEnums ignore)
         {
