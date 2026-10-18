@@ -3,7 +3,6 @@
     public enum StateEnums
     {
         BeRuled,
-
         #region Movement
         CanMove,
         Dash, 
@@ -12,6 +11,14 @@
         Hit,
         HitCool,
         Invisible,
+        #endregion
+
+        #region PlayerAttack
+
+        FirstAttack,
+        SecondAttack,
+        ThirdAttack,
+
         #endregion
 
     }

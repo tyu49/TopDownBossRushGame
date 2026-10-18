@@ -7,8 +7,8 @@ namespace _01.Scripts.FSM
     {
         private AbstractState _currentState;
         private Dictionary<StateEnums, AbstractState> _stateDic = new ();
-        private bool _lockedChange;
-    
+        public bool LockedChange { get; private set; }
+
         public void AddState(StateEnums type, AbstractState abstractState)
         {
             if (!_stateDic.TryAdd(type, abstractState))
@@ -17,6 +17,7 @@ namespace _01.Scripts.FSM
 
         public void ChangeState(StateEnums type)
         {
+            if (LockedChange) return;
             if (!_stateDic.ContainsKey(type))
             {
                 Debug.LogError("존재하지 않는 키값을 통해 변경 시도");
@@ -47,7 +48,7 @@ namespace _01.Scripts.FSM
             _currentState.TriggerCalled();
         }
 
-        public void SetChangeLock(bool value) => _lockedChange = value;
+        public void SetChangeLock(bool value) => LockedChange = value;
 
 
 

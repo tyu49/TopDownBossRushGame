@@ -2,7 +2,5 @@
 {
     public interface IStateController
     {
-        void SetAllDefault(StateEnums ignore);
-        void SetAllRuled(StateEnums ignore);
     }
 }
