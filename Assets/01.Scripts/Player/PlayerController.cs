@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _01.Scripts.Player
 {
-    public class PlayerController : MonoBehaviour, IHealthHavable, IMovable
+    public class PlayerController : MonoBehaviour, IDamageable, IMovable
     {
         public MovementModule MoveMd { get; private set; }
         public AttackModule AttackMd { get; private set; }
@@ -25,14 +25,6 @@ namespace _01.Scripts.Player
         private void OnDestroy()
         {
             EventDisSub();
-        }
-
-        public void GetDamage(float damage)
-        {
-        }
-
-        public  void GetHeal(float heal)
-        {
         }
 
         #region Initialize
@@ -89,5 +81,14 @@ namespace _01.Scripts.Player
         #endregion
 
         #endregion
+
+        public void GetDamage(float damage, IAttackable attacker)
+        {
+
+        }
+
+        public void GetHeal(float heal)
+        {
+        }
     }
 }

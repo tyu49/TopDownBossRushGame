@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _01.Scripts.Modules
 {
-    public class AttackModule : MonoBehaviour
+    public class AttackModule : MonoBehaviour, IAttackable
     {
         [SerializeField] private int maxBuffer;
         private Collider2D[] _resultsArray;
@@ -24,8 +24,8 @@ namespace _01.Scripts.Modules
             {
                 var target = _resultsArray[i];
 
-                if (target.TryGetComponent<IHealthHavable>(out var compo))
-                    compo.GetDamage(setting.DefaultDamage);
+                if (target.TryGetComponent<IDamageable>(out var compo))
+                    compo.GetDamage(setting.DefaultDamage, this);
             }
         }
         
